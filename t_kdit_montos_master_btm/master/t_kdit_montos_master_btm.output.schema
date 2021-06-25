@@ -1,0 +1,73 @@
+{
+  "namespace": "kdit",
+  "name": "t_kdit_montos_master_btm",
+  "doc": "Tabla master montos para sprint 1 ejercicio 2",
+  "database": "master",
+  "storageZone": "Masterdata",
+  "storageType": "HDFS-Parquet",
+  "physicalPath": "/data/master/kdit/data/retailBusinessBanking/t_kdit_montos_master_btm",
+  "partitions": ["transaction_request_date"],
+  "securityLevel": "L1",
+  "type": "record",
+  "fields": [{
+    "name": "main_account_id",
+    "type": ["null", "int64"],
+    "logicalFormat": "NUMERIC BIG",
+    "deleted": false,
+    "metadata": false,
+    "default": null
+  }, {
+    "name": "gf_job_class_desc",
+    "type": "string",
+    "logicalFormat": "ALPHANUMERIC(80)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "total_gross_margin_amount",
+    "type": "decimal(7,2)",
+    "logicalFormat": "DECIMAL(7,2)",
+    "deleted": false,
+    "metadata": false,
+    "default": 0.0,
+    "format": "(7,2)",
+    "locale": "mx"
+  }, {
+    "name": "last_payment_amount",
+    "type": ["null", "int64"],
+    "logicalFormat": "NUMERIC BIG",
+    "deleted": false,
+    "metadata": false,
+    "default": null
+  }, {
+    "name": "pending_installments_number",
+    "type": ["null", "int32"],
+    "logicalFormat": "NUMERIC LARGE",
+    "deleted": false,
+    "metadata": false,
+    "default": null
+  }, {
+    "name": "transaction_request_date",
+    "type": "date",
+    "logicalFormat": "DATE",
+    "deleted": false,
+    "metadata": false,
+    "default": "",
+    "format": "yyyy-MM-dd",
+    "locale": "mx"
+  }, {
+    "name": "day_first_amount_id",
+    "type": "string",
+    "logicalFormat": "ALPHANUMERIC(2)",
+    "deleted": false,
+    "metadata": true,
+    "default": ""
+  }, {
+    "name": "execution_year_id",
+    "type": "string",
+    "logicalFormat": "ALPHANUMERIC(2)",
+    "deleted": false,
+    "metadata": true,
+    "default": ""
+  }]
+}

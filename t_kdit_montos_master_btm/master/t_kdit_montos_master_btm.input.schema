@@ -1,0 +1,57 @@
+{
+  "namespace": "kdit",
+  "name": "t_kdit_montos_raw_btm",
+  "doc": "Tabla raw montos para sprint 1 ejercicio 2",
+  "database": "raw",
+  "storageZone": "Rawdata",
+  "storageType": "HDFS-Avro",
+  "physicalPath": "/data/raw/kdit/data/t_kdit_montos_raw_btm",
+  "partitions": ["transaction_request_date"],
+  "type": "record",
+  "fields": [{
+    "name": "main_account_id",
+    "type": ["string", "null"],
+    "logicalFormat": "NUMERIC BIG",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "gf_job_class_desc",
+    "type": "string",
+    "logicalFormat": "ALPHANUMERIC(50)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "total_gross_margin_amount",
+    "type": "string",
+    "logicalFormat": "DECIMAL(7,2)",
+    "deleted": false,
+    "metadata": false,
+    "default": "",
+    "locale": "mx"
+  }, {
+    "name": "last_payment_amount",
+    "type": ["string", "null"],
+    "logicalFormat": "NUMERIC BIG",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "pending_installments_number",
+    "type": ["string", "null"],
+    "logicalFormat": "NUMERIC LARGE",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "transaction_request_date",
+    "type": "string",
+    "logicalFormat": "DATE",
+    "deleted": false,
+    "metadata": false,
+    "default": "",
+    "format": "yyyy-MM-dd",
+    "locale": "mx"
+  }]
+}
