@@ -1,0 +1,44 @@
+{
+  "namespace": "kdit",
+  "name": "t_kdit_inversiones_raw_btm",
+  "doc": "Tabla para ingesta raw sprint 1 ejercicio 1",
+  "database": "raw",
+  "storageZone": "Rawdata",
+  "storageType": "HDFS-Avro",
+  "physicalPath": "/data/raw/kdit/data/t_kdit_inversiones_raw_btm",
+  "partitions": ["cutoff_date"],
+  "type": "record",
+  "fields": [{
+    "name": "main_account_id",
+    "type": "string",
+    "logicalFormat": "ALPHANUMERIC(10)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "transaction_amount",
+    "type": "string",
+    "logicalFormat": "DECIMAL(9,2)(9)",
+    "deleted": false,
+    "metadata": false,
+    "default": "",
+    "format": "(9,2)",
+    "locale": "mx"
+  }, {
+    "name": "user_name",
+    "type": "string",
+    "logicalFormat": "ALPHANUMERIC(17)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "cutoff_date",
+    "type": "string",
+    "logicalFormat": "DATE(8)",
+    "deleted": false,
+    "metadata": false,
+    "default": "",
+    "format": "ddMMyyyy",
+    "locale": "mx"
+  }]
+}
