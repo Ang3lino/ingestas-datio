@@ -1,0 +1,144 @@
+{
+  "namespace": "kdit",
+  "name": "t_kdit_folios_raw_btm",
+  "doc": "Tabla folios sprint 2 btm",
+  "database": "raw",
+  "storageZone": "Rawdata",
+  "storageType": "HDFS-Avro",
+  "physicalPath": "/data/raw/kdit/data/t_kdit_folios_raw_btm",
+  "type": "record",
+  "fields": [{
+    "name": "insurance_company_type",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(2)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "gl_folio_status_type",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(2)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "gl_folio_movement_date",
+    "type": ["string", "null"],
+    "logicalFormat": "DATE",
+    "deleted": false,
+    "metadata": false,
+    "default": "",
+    "format": "yyyy-MM-dd",
+    "locale": "mx"
+  }, {
+    "name": "gl_folio_id",
+    "type": "string",
+    "logicalFormat": "DECIMAL(22,0)",
+    "deleted": false,
+    "metadata": false,
+    "default": "",
+    "locale": "mx"
+  }, {
+    "name": "gl_folio_internal_id",
+    "type": ["string", "null"],
+    "logicalFormat": "DECIMAL(22,0)",
+    "deleted": false,
+    "metadata": false,
+    "default": "",
+    "locale": "mx"
+  }, {
+    "name": "gl_folio_type",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(3)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "operation_id",
+    "type": ["string", "null"],
+    "logicalFormat": "DECIMAL(22,0)",
+    "deleted": false,
+    "metadata": false,
+    "default": "",
+    "locale": "mx"
+  }, {
+    "name": "gl_folio_auto_gen_mark_type",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(1)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "premium_balance_amount",
+    "type": ["string", "null"],
+    "logicalFormat": "DECIMAL(22,2)",
+    "deleted": false,
+    "metadata": false,
+    "default": "",
+    "locale": "mx"
+  }, {
+    "name": "subscriber_branch_id",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(6)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "premium_balance_mark_type",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(1)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "gl_folio_credit_amount",
+    "type": ["string", "null"],
+    "logicalFormat": "DECIMAL(22,2)",
+    "deleted": false,
+    "metadata": false,
+    "default": "",
+    "format": "(22,2)",
+    "locale": "mx"
+  }, {
+    "name": "gl_folio_debit_amount",
+    "type": ["string", "null"],
+    "logicalFormat": "DECIMAL(22,2)(22)",
+    "deleted": false,
+    "metadata": false,
+    "default": "",
+    "locale": "mx"
+  }, {
+    "name": "gl_folio_close_id",
+    "type": ["string", "null"],
+    "logicalFormat": "DECIMAL(22,0)",
+    "deleted": false,
+    "metadata": false,
+    "default": "",
+    "locale": "mx"
+  }, {
+    "name": "gl_month_id",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(6)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "bill_internal_id",
+    "type": ["string", "null"],
+    "logicalFormat": "DECIMAL(22,2)",
+    "deleted": false,
+    "metadata": false,
+    "default": "",
+    "format": "P,D",
+    "locale": "mx"
+  }, {
+    "name": "credit_note_id",
+    "type": ["string", "null"],
+    "logicalFormat": "DECIMAL(22,2)",
+    "deleted": false,
+    "metadata": false,
+    "default": "",
+    "format": "P,D",
+    "locale": "mx"
+  }]
+}
