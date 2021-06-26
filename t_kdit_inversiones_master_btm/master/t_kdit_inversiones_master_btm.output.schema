@@ -1,0 +1,45 @@
+{
+  "namespace": "kdit",
+  "name": "t_kdit_inversiones_master_btm",
+  "doc": "Tabla master para ejercicio 1 sprint 1",
+  "database": "master",
+  "storageZone": "Masterdata",
+  "storageType": "HDFS-Parquet",
+  "physicalPath": "/data/master/kdit/data/retailBusinessBanking/t_kdit_inversiones_master_btm",
+  "partitions": ["cutoff_date"],
+  "securityLevel": "L1",
+  "type": "record",
+  "fields": [{
+    "name": "main_account_id",
+    "type": "string",
+    "logicalFormat": "ALPHANUMERIC(10)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "transaction_amount",
+    "type": "decimal(9,2)",
+    "logicalFormat": "DECIMAL(9,2)",
+    "deleted": false,
+    "metadata": false,
+    "default": 0.0,
+    "format": "(9,2)",
+    "locale": "mx"
+  }, {
+    "name": "user_name",
+    "type": "string",
+    "logicalFormat": "ALPHANUMERIC(17)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "cutoff_date",
+    "type": "date",
+    "logicalFormat": "DATE",
+    "deleted": false,
+    "metadata": false,
+    "default": "",
+    "format": "yyyy-MM-dd",
+    "locale": "mx"
+  }]
+}

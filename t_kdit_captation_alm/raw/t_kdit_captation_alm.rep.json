@@ -1,0 +1,14 @@
+{
+    "_id" : "kdit-mx-krb-inr-kditcaptationalmr-01",
+    "description" : "Job kdit-mx-krb-inr-kditcaptationalmr-01 created with Skynet.",
+    "kind" : "processing",
+    "params" : {
+        "artifactUrl" : "${repository.endpoint}/spark-global-libs-release-local/com/datio/kirby/kirby-ingestion/${process.version}/kirby-ingestion-${process.version}-jar-with-dependencies.jar",
+        "configUrl" : "${repository.endpoint}/${repository.repo}/kirby/mx/kdit/raw/t_kdit_captation_alm/${version}/t_kdit_captation_alm.rep.conf",
+        "mainClass" : "com.datio.kirby.Launcher",
+        "sparkHistoryEnabled" : "true"
+    },
+    "runtime" : "spark:2.2.1",
+    "size" : "XS",
+    "streaming" : false
+}

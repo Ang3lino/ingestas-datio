@@ -1,0 +1,14 @@
+{
+    "_id" : "kdit-mx-krb-inr-kditinversionesrawbtmp-01",
+    "description" : "Job kdit-mx-krb-inr-kditinversionesrawbtmp-01 created with Skynet.",
+    "kind" : "processing",
+    "params" : {
+        "artifactUrl" : "${repository.endpoint}/spark-global-libs-release-local/com/datio/kirby/kirby-ingestion/${process.version}/kirby-ingestion-${process.version}-jar-with-dependencies.jar",
+        "configUrl" : "${repository.endpoint}/${repository.repo}/kirby/mx/kdit/raw/t_kdit_inversiones_raw_btm/${version}/t_kdit_inversiones_raw_btm.conf",
+        "mainClass" : "com.datio.kirby.Launcher",
+        "sparkHistoryEnabled" : "true"
+    },
+    "runtime" : "spark:2.2.1",
+    "size" : "XXS",
+    "streaming" : false
+}

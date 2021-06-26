@@ -1,0 +1,155 @@
+{
+  "namespace": "kdit",
+  "name": "t_kdit_phmds_alm",
+  "doc": "Tabla para ingesta raw sprint 1 ejercicio 3",
+  "database": "raw",
+  "storageZone": "Rawdata",
+  "storageType": "HDFS-Avro",
+  "physicalPath": "/data/raw/kdit/data/t_kdit_phmds_alm",
+  "partitions": ["business_day_id"],
+  "type": "record",
+  "fields": [{
+    "name": "business_day_id",
+    "type": "string",
+    "logicalFormat": "ALPHANUMERIC(8)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "hk_gl_desc",
+    "type": "string",
+    "logicalFormat": "ALPHANUMERIC(32)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "load_dt_date",
+    "type": "string",
+    "logicalFormat": "DATE",
+    "deleted": false,
+    "metadata": false,
+    "default": "",
+    "format": "MM/dd/yyyy HH:mm:ss",
+    "locale": "mx"
+  }, {
+    "name": "srce_sys_desc",
+    "type": "string",
+    "logicalFormat": "ALPHANUMERIC(20)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "srce_sbsys_desc",
+    "type": "string",
+    "logicalFormat": "ALPHANUMERIC(20)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "proc_id",
+    "type": "string",
+    "logicalFormat": "DECIMAL(38,0)",
+    "deleted": false,
+    "metadata": false,
+    "default": "",
+    "format": "38,0",
+    "locale": "mx"
+  }, {
+    "name": "gl_name_name",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(250)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "ca_summ_code_name",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(250)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "bufs_rollup_point_code_desc",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(250)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "bufs_rptg_wgt_desc",
+    "type": ["string", "null"],
+    "logicalFormat": "DECIMAL(15,0)",
+    "deleted": false,
+    "metadata": false,
+    "default": "",
+    "format": "15,0",
+    "locale": "mx"
+  }, {
+    "name": "neocon_rollup_point_code_desc",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(250)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "neocon_rptg_wgt_desc",
+    "type": ["string", "null"],
+    "logicalFormat": "DECIMAL(15,0)",
+    "deleted": false,
+    "metadata": false,
+    "default": "",
+    "format": "15,0",
+    "locale": "mx"
+  }, {
+    "name": "fin_elem_code_desc",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(250)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "accrl_meth_code_desc",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(250)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "fix_var_expns_code_desc",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(250)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "ver_nbr_desc",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(38)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "ver_name_desc",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(50)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "load_process_id",
+    "type": "string",
+    "logicalFormat": "ALPHANUMERIC(32)",
+    "deleted": false,
+    "metadata": true,
+    "default": "value"
+  }, {
+    "name": "audit_date",
+    "type": "string",
+    "logicalFormat": "TIMESTAMP",
+    "deleted": false,
+    "metadata": true,
+    "default": "",
+    "format": "yyyy-MM-dd HH:mm:ss.SSS",
+    "locale": "mx"
+  }]
+}
