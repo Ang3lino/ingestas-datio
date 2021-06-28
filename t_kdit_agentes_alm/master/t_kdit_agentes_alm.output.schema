@@ -1,0 +1,167 @@
+{
+  "namespace": "kdit",
+  "name": "t_kdit_agentes_alm",
+  "doc": "Ejercicio de sprint 2, tabla agentes master",
+  "database": "master",
+  "storageZone": "Masterdata",
+  "storageType": "HDFS-Parquet",
+  "physicalPath": "/data/master/kdit/data/retailBusinessBanking/t_kdit_agentes_alm",
+  "partitions": ["cutoff_date"],
+  "securityLevel": "L1T",
+  "type": "record",
+  "fields": [{
+    "name": "insurance_company_name",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(2)",
+    "deleted": false,
+    "metadata": false,
+    "default": "",
+    "origin": "BBVA",
+    "encrypted": false,
+    "encryptionType": "name",
+    "encryptionMethod": "aes"
+  }, {
+    "name": "gl_folio_status_type",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(3)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "gl_folio_movement_date",
+    "type": ["date", "null"],
+    "logicalFormat": "DATE",
+    "deleted": false,
+    "metadata": false,
+    "default": "",
+    "format": "yyyy-MM-dd",
+    "locale": "mx"
+  }, {
+    "name": "gl_folio_id",
+    "type": ["null", "decimal(22,0)"],
+    "logicalFormat": "DECIMAL(22,0)",
+    "deleted": false,
+    "metadata": false,
+    "default": null,
+    "format": "(22,0)",
+    "locale": "mx"
+  }, {
+    "name": "gl_folio_internal_id",
+    "type": ["null", "decimal(22,0)"],
+    "logicalFormat": "DECIMAL(22,0)",
+    "deleted": false,
+    "metadata": false,
+    "default": null,
+    "format": "(22,0)",
+    "locale": "mx"
+  }, {
+    "name": "gl_folio_type",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(3)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "operation_id",
+    "type": ["null", "decimal(22,0)"],
+    "logicalFormat": "DECIMAL(22,0)",
+    "deleted": false,
+    "metadata": false,
+    "default": null,
+    "format": "(22,0)",
+    "locale": "mx"
+  }, {
+    "name": "gl_folio_auto_gen_mark_type",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(1)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "premium_balance_amount",
+    "type": ["null", "decimal(22,2)"],
+    "logicalFormat": "DECIMAL(22,2)",
+    "deleted": false,
+    "metadata": false,
+    "default": null,
+    "format": "(22,2)",
+    "locale": "mx"
+  }, {
+    "name": "subscriber_branch_id",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(6)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "gl_folio_credit_amount",
+    "type": ["null", "decimal(22,2)"],
+    "logicalFormat": "DECIMAL(22,2)",
+    "deleted": false,
+    "metadata": false,
+    "default": null,
+    "format": "(22,2)",
+    "locale": "mx"
+  }, {
+    "name": "gl_folio_debit_amount",
+    "type": ["null", "decimal(22,2)"],
+    "logicalFormat": "DECIMAL(22,2)",
+    "deleted": false,
+    "metadata": false,
+    "default": null,
+    "format": "(22,2)",
+    "locale": "mx"
+  }, {
+    "name": "gl_folio_close_id",
+    "type": ["null", "decimal(22,0)"],
+    "logicalFormat": "DECIMAL(22,0)",
+    "deleted": false,
+    "metadata": false,
+    "default": null,
+    "format": "(22,0)",
+    "locale": "mx"
+  }, {
+    "name": "gl_month_id",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(6)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "bill_internal_id",
+    "type": ["null", "decimal(22,2)"],
+    "logicalFormat": "DECIMAL(22,2)",
+    "deleted": false,
+    "metadata": false,
+    "default": null,
+    "format": "(22,2)",
+    "locale": "mx"
+  }, {
+    "name": "credit_note_id",
+    "type": ["null", "decimal(22,2)"],
+    "logicalFormat": "DECIMAL(22,2)",
+    "deleted": false,
+    "metadata": false,
+    "default": null,
+    "format": "(22,2)",
+    "locale": "mx"
+  }, {
+    "name": "cutoff_date",
+    "type": "date",
+    "logicalFormat": "DATE",
+    "deleted": false,
+    "metadata": false,
+    "default": "",
+    "format": "yyyy-MM-dd",
+    "locale": "mx"
+  }, {
+    "name": "operational_audit_insert_date",
+    "type": "timestamp",
+    "logicalFormat": "TIMESTAMP",
+    "deleted": false,
+    "metadata": true,
+    "default": "",
+    "format": "yyyy-MM-dd HH:mm:ss.SSS",
+    "locale": "mx"
+  }]
+}

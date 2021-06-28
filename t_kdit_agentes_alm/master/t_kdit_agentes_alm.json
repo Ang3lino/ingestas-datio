@@ -1,0 +1,14 @@
+{
+    "_id" : "kdit-mx-krb-inm-kditagentesalmp-01",
+    "description" : "Job kdit-mx-krb-inm-kditagentesalmp-01 created with Skynet.",
+    "kind" : "processing",
+    "params" : {
+        "artifactUrl" : "${repository.endpoint}/spark-global-libs-release-local/com/datio/kirby/kirby-ingestion/${process.version}/kirby-ingestion-${process.version}-jar-with-dependencies.jar",
+        "configUrl" : "${repository.endpoint}/${repository.repo}/kirby/mx/kdit/master/t_kdit_agentes_alm/${version}/t_kdit_agentes_alm.conf",
+        "mainClass" : "com.datio.kirby.Launcher",
+        "sparkHistoryEnabled" : "true"
+    },
+    "runtime" : "spark:2.2.1",
+    "size" : "SET THE PROPER JOB SIZE. Available job sizes: 'XS, S, M, L, XL'",
+    "streaming" : false
+}

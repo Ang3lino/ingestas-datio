@@ -1,0 +1,160 @@
+{
+  "namespace": "kdit",
+  "name": "t_kdit_agentes_alm",
+  "doc": "Objeto de los agentes en raw equipo blue tab MX",
+  "database": "raw",
+  "storageZone": "Rawdata",
+  "storageType": "HDFS-Avro",
+  "physicalPath": "/data/raw/kdit/data/t_kdit_agentes_alm",
+  "partitions": ["cutoff_date"],
+  "type": "record",
+  "fields": [{
+    "name": "insurance_company_name",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(2)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "gl_folio_status_type",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(3)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "gl_folio_movement_date",
+    "type": ["string", "null"],
+    "logicalFormat": "DATE",
+    "deleted": false,
+    "metadata": false,
+    "default": "",
+    "format": "yyyy-MM-dd",
+    "locale": "mx"
+  }, {
+    "name": "gl_folio_id",
+    "type": ["string", "null"],
+    "logicalFormat": "DECIMAL(22,0)",
+    "deleted": false,
+    "metadata": false,
+    "default": "",
+    "format": "(22,0)",
+    "locale": "mx"
+  }, {
+    "name": "gl_folio_internal_id",
+    "type": ["string", "null"],
+    "logicalFormat": "DECIMAL(22,0)",
+    "deleted": false,
+    "metadata": false,
+    "default": "",
+    "format": "22,0",
+    "locale": "mx"
+  }, {
+    "name": "gl_folio_type",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(3)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "operation_id",
+    "type": ["string", "null"],
+    "logicalFormat": "DECIMAL(22,0)",
+    "deleted": false,
+    "metadata": false,
+    "default": "",
+    "format": "22,0",
+    "locale": "mx"
+  }, {
+    "name": "gl_folio_auto_gen_mark_type",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(1)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "premium_balance_amount",
+    "type": ["string", "null"],
+    "logicalFormat": "DECIMAL(22,2)",
+    "deleted": false,
+    "metadata": false,
+    "default": "",
+    "format": "22,2",
+    "locale": "mx"
+  }, {
+    "name": "subscriber_branch_id",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(6)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "premium_balance_mark_type",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(1)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "gl_folio_credit_amount",
+    "type": ["string", "null"],
+    "logicalFormat": "DECIMAL(22,2)",
+    "deleted": false,
+    "metadata": false,
+    "default": "",
+    "format": "22,2",
+    "locale": "mx"
+  }, {
+    "name": "gl_folio_debit_amount",
+    "type": ["string", "null"],
+    "logicalFormat": "DECIMAL(22,2)",
+    "deleted": false,
+    "metadata": false,
+    "default": "",
+    "format": "22,2",
+    "locale": "mx"
+  }, {
+    "name": "gl_folio_close_id",
+    "type": ["string", "null"],
+    "logicalFormat": "DECIMAL(22,0)",
+    "deleted": false,
+    "metadata": false,
+    "default": "",
+    "format": "22,0",
+    "locale": "mx"
+  }, {
+    "name": "gl_month_id",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(6)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "bill_internal_id",
+    "type": ["string", "null"],
+    "logicalFormat": "DECIMAL(22,2)",
+    "deleted": false,
+    "metadata": false,
+    "default": "",
+    "format": "22,2",
+    "locale": "mx"
+  }, {
+    "name": "credit_note_id",
+    "type": ["string", "null"],
+    "logicalFormat": "DECIMAL(22,2)",
+    "deleted": false,
+    "metadata": false,
+    "default": "",
+    "format": "22,2",
+    "locale": "mx"
+  }, {
+    "name": "cutoff_date",
+    "type": "string",
+    "logicalFormat": "DATE",
+    "deleted": false,
+    "metadata": false,
+    "default": "",
+    "format": "yyyy-MM-dd",
+    "locale": "mx"
+  }]
+}
