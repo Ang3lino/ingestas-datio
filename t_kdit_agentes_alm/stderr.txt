@@ -1,0 +1,746 @@
+C:\Users\BTUSER\.jdks\corretto-1.8.0_292\bin\java.exe "-javaagent:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2021.1.2\lib\idea_rt.jar=59444:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2021.1.2\bin" -Dfile.encoding=UTF-8 -classpath "C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2021.1.2\lib\idea_rt.jar" com.intellij.rt.execution.CommandLineWrapper C:\Users\BTUSER\AppData\Local\Temp\idea_classpath2018258754 com.datio.skynet.cli.SkynetCli run-kirby --uuaa kdit --table t_kdit_agentes_alm --phase master --freq rep --dataset 0 --dataset-nulls date,decimal --params ODATE=2019-03-06
+12:16:25.700 DEBUG 
+       ____ _             ╔═╗┬┌─┬ ┬┌┐┌┌─┐┌┬┐             ______
+      //|\\\\\            ╚═╗├┴┐└┬┘│││├┤  │             <((((((\\\
+     ///´´´´´´            ╚═╝┴ ┴ ┴ ┘└┘└─┘ ┴             /      . }\             > Start time           : Mon Jun 28 12:16:25 CDT 2021
+    (((    ´\´          My creator MRMM is gone        ;--..--._|}              > Number of CPUs       : 4
+     )))   _´/            but I'll never die.          '--/\--'  )              > Max memory available : 3618.0 MB
+    ///, ---´                        (\                | '-'  :'|               > Current memory       : 245.0 MB
+    (((,(( \---.                      \\               . -==- .-|               > Free memory          : 201.0 MB
+    )))  ))` ,  \                      \\               \.__.'   \--._          > Kirby version        : 2.12.7
+   ((__´(    .--´                      [\\          __.--|       //  _/'--.     > Hammurabi version    : 3.3.3
+    | |   ,-./\ \                      \ \\       .'-._ ('-----'/ __/      \    > Skynet version       : T-1300.2
+     \ \__,-.  \ \   __,_____           \ \\     /   __>|      | '--.       |   > Project version      : 0.1.0-SNAPSHOT
+     /`.__,-'_,-\ `-/ __.==--"           \ \\   |   \   |     /    /       /
+    /       \    `-/ /-'                  \ \\  |    \  |    /    /       /     > Special ACKs         : CGM, SDC & MRMM
+
+    
+12:16:25.712 INFO 'run-kirby' command starting for table 't_kdit_agentes_alm' in phase 'master'...
+12:16:26.205 INFO Running Spark version 2.2.1
+12:16:28.375 INFO Submitted application: Skynet Job Runner
+12:16:38.713 INFO Added file C:\Users\BTUSER\AppData\Local\Temp\skynet-4376805773122244133.cfg at file:/C:/Users/BTUSER/AppData/Local/Temp/skynet-4376805773122244133.cfg with timestamp 1624900598711
+12:16:39.156 INFO Added file 'caas/caas-test.cfg' with secrets to Spark.
+12:16:39.398 INFO Configuring local ingestion...
+12:16:39.551 INFO Validating Kirby config file 'C:\Users\BTUSER\Documents\scala\angel_skynet_ingestion_certification\kdit\src\main\resources\kirby\kdit\t_kdit_agentes_alm\master\t_kdit_agentes_alm.rep.conf' against JSON schema.
+12:16:40.884 INFO Setting input data path to 'file:/C:/Users/BTUSER/AppData/Local/Temp/skynet/kirby/t_kdit_agentes_alm/master/rep/input/'
+12:16:40.891 INFO Setting input schema path to 'Some(Quoted("file:/C:/Users/BTUSER/Documents/scala/angel_skynet_ingestion_certification/kdit/src/main/resources/kirby/kdit/t_kdit_agentes_alm/master/t_kdit_agentes_alm.input.schema"))'
+12:16:40.892 INFO Setting output data dir to 'file:/C:/Users/BTUSER/AppData/Local/Temp/skynet/kirby/t_kdit_agentes_alm/master/rep/output/'
+12:16:40.894 INFO Setting output schema path to 'Some(Quoted("file:/C:/Users/BTUSER/Documents/scala/angel_skynet_ingestion_certification/kdit/src/main/resources/kirby/kdit/t_kdit_agentes_alm/master/t_kdit_agentes_alm.output.schema"))'
+12:16:40.941 INFO This is the FAKED Kirby config file: 
+kirby {
+    input {
+        applyConversions=false
+        options {
+            castMode=notPermissive
+        }
+        paths=[
+            "file:/C:/Users/BTUSER/AppData/Local/Temp/skynet/kirby/t_kdit_agentes_alm/master/rep/input/"
+        ]
+        schema {
+            path="file:/C:/Users/BTUSER/Documents/scala/angel_skynet_ingestion_certification/kdit/src/main/resources/kirby/kdit/t_kdit_agentes_alm/master/t_kdit_agentes_alm.input.schema"
+        }
+        type=avro
+    }
+    output {
+        coalesce {
+            partitions=1
+        }
+        force=false
+        mode=reprocess
+        options {}
+        partition=[
+            "cutoff_date"
+        ]
+        path="file:/C:/Users/BTUSER/AppData/Local/Temp/skynet/kirby/t_kdit_agentes_alm/master/rep/output/"
+        reprocess=[
+            "cutoff_date=2019-03-06"
+        ]
+        schema {
+            path="file:/C:/Users/BTUSER/Documents/scala/angel_skynet_ingestion_certification/kdit/src/main/resources/kirby/kdit/t_kdit_agentes_alm/master/t_kdit_agentes_alm.output.schema"
+        }
+        type=parquet
+    }
+    transformations=[
+        {
+            filter="cutoff_date='2019-03-06'"
+            type=sqlFilter
+        },
+        {
+            field="operational_audit_insert_date"
+            type=setCurrentDate
+        },
+        {
+            copyField="gl_folio_movement_date"
+            field="cutoff_date"
+            type=copycolumn
+        },
+        {
+            default="1"
+            fields=[
+                "gl_folio_close_id"
+            ]
+            type=initNulls
+        },
+        {
+            default="0"
+            fields=[
+                "credit_note_id"
+            ]
+            type=initNulls
+        },
+        {
+            default="3"
+            fields=[
+                "bill_internal_id"
+            ]
+            type=initNulls
+        },
+        {
+            field="gl_folio_movement_date|cutoff_date"
+            regex=true
+            replacements=[]
+            type=formatter
+            typeToCast=date
+        },
+        {
+            field="gl_folio_id|gl_folio_internal_id|operation_id"
+            regex=true
+            replacements=[]
+            type=formatter
+            typeToCast="decimal(22,0)"
+        },
+        {
+            field="premium_balance_amount|gl_folio_credit_amount|gl_folio_debit_amount|gl_folio_close_id|bill_internal_id|credit_note_id"
+            regex=true
+            replacements=[]
+            type=formatter
+            typeToCast="decimal(22,2)"
+        },
+        {
+            field="gl_folio_close_id"
+            replacements=[]
+            type=formatter
+            typeToCast="decimal(22,0)"
+        },
+        {
+            columnsToDrop=[
+                "premium_balance_mark_type"
+            ]
+            type=dropcolumns
+        }
+    ]
+}
+
+12:16:40.958 INFO Dataset generation is disabled.
+12:16:40.962 INFO Executing Kirby Spark job with the config file 'C:\Users\BTUSER\AppData\Local\Temp\skynet-4464231394704489288.conf'.
+12:16:41.050 INFO Init configuration
+12:16:41.105 INFO Init config structure validation
+12:16:41.164 INFO ConfigValidator$ check success
+12:16:41.166 INFO Checking Kirby configuration file...
+12:16:45.718 INFO Output: Write to path => file:/C:/Users/BTUSER/AppData/Local/Temp/skynet/kirby/t_kdit_agentes_alm/master/rep/output/
+12:16:45.718 INFO Input: Write to path => file:/C:/Users/BTUSER/AppData/Local/Temp/skynet/kirby/t_kdit_agentes_alm/master/rep/output/ 
+12:16:47.534 WARN defaultType is not defined, applying default value (None)
+12:16:47.543 INFO Apply spark options
+12:16:47.543 INFO Reading input
+12:16:47.549 INFO Input: Init read
+12:16:47.549 INFO Input: AvroInput reader
+12:16:49.069 INFO Input: with options: castMode -> Unquoted("notPermissive")
+12:16:49.091 INFO AvroInput: removed partition columns (cutoff_date) from schema. Final fields: insurance_company_name, gl_folio_status_type, gl_folio_movement_date, gl_folio_id, gl_folio_internal_id, gl_folio_type, operation_id, gl_folio_auto_gen_mark_type, premium_balance_amount, subscriber_branch_id, premium_balance_mark_type, gl_folio_credit_amount, gl_folio_debit_amount, gl_folio_close_id, gl_month_id, bill_internal_id, credit_note_id
+12:16:51.796 INFO Input: Read from paths => file:/C:/Users/BTUSER/AppData/Local/Temp/skynet/kirby/t_kdit_agentes_alm/master/rep/input/ 
+12:16:55.565 INFO Created broadcast 0 from broadcast at DefaultSource.scala:158
+12:16:56.075 INFO Apply transformations
+12:16:56.078 INFO Transformer: new Transformation : sqlFilter
+12:16:56.809 INFO Transformer: new Transformation : setCurrentDate
+12:16:57.678 INFO Transformer: new Transformation : copycolumn
+12:16:57.684 INFO CopyColumn: Copy value of column gl_folio_movement_date to column cutoff_date None
+12:16:57.792 INFO Transformer: new Transformation : initNulls
+12:16:57.806 INFO InitNulls: column: gl_folio_close_id with default value 1
+12:16:58.372 INFO Created broadcast 1 from broadcast at DefaultSource.scala:158
+12:16:58.576 INFO Transformer: new Transformation : initNulls
+12:16:58.580 INFO InitNulls: column: credit_note_id with default value 0
+12:16:59.083 INFO Transformer: new Transformation : initNulls
+12:16:59.084 INFO InitNulls: column: bill_internal_id with default value 3
+12:16:59.434 INFO Transformer: new Transformation : formatter
+12:16:59.862 INFO transform formatter for column: kirby-transform-formatter_9bcd7a7ae9f6__field to cast: kirby-transform-formatter_9bcd7a7ae9f6__typeToCast with these replacements: 
+12:16:59.918 INFO transform formatter for column: kirby-transform-formatter_690aab9e4c03__field to cast: kirby-transform-formatter_690aab9e4c03__typeToCast with these replacements: 
+12:16:59.938 INFO Transformer: new Transformation : formatter
+12:16:59.948 INFO transform formatter for column: kirby-transform-formatter_c09cb3348615__field to cast: kirby-transform-formatter_c09cb3348615__typeToCast with these replacements: 
+12:16:59.996 INFO transform formatter for column: kirby-transform-formatter_856dd8f96163__field to cast: kirby-transform-formatter_856dd8f96163__typeToCast with these replacements: 
+12:17:00.016 INFO transform formatter for column: kirby-transform-formatter_f385137ed9d8__field to cast: kirby-transform-formatter_f385137ed9d8__typeToCast with these replacements: 
+12:17:00.066 INFO Transformer: new Transformation : formatter
+12:17:00.075 INFO transform formatter for column: kirby-transform-formatter_dfb11320fc69__field to cast: kirby-transform-formatter_dfb11320fc69__typeToCast with these replacements: 
+12:17:00.105 INFO transform formatter for column: kirby-transform-formatter_103b4e2d5b82__field to cast: kirby-transform-formatter_103b4e2d5b82__typeToCast with these replacements: 
+12:17:00.173 INFO transform formatter for column: kirby-transform-formatter_c63f9cd2ce58__field to cast: kirby-transform-formatter_c63f9cd2ce58__typeToCast with these replacements: 
+12:17:00.203 INFO transform formatter for column: kirby-transform-formatter_f08da4f959ba__field to cast: kirby-transform-formatter_f08da4f959ba__typeToCast with these replacements: 
+12:17:00.246 INFO transform formatter for column: kirby-transform-formatter_cd69f6067559__field to cast: kirby-transform-formatter_cd69f6067559__typeToCast with these replacements: 
+12:17:00.276 INFO transform formatter for column: kirby-transform-formatter_5351d891d3e4__field to cast: kirby-transform-formatter_5351d891d3e4__typeToCast with these replacements: 
+12:17:00.349 INFO Transformer: new Transformation : formatter
+12:17:00.349 INFO transform formatter for column: kirby-transform-formatter_b1ab3b5cf508__field to cast: kirby-transform-formatter_b1ab3b5cf508__typeToCast with these replacements: 
+12:17:00.402 INFO Transformer: new Transformation : dropcolumns
+12:17:00.402 INFO DropColumns: drop columns: premium_balance_mark_type
+12:17:00.507 INFO Validate df and check mandatory columns
+12:17:00.767 INFO The validation has been finished sucessfully.
+12:17:00.767 INFO Write the file in the correct format
+12:17:00.819 WARN Tokenization with method name will be applied automatically to column insurance_company_name.
+12:17:01.119 INFO Output: Mode reprocess
+12:17:01.126 INFO Output: reprocess partitions cutoff_date
+12:17:01.133 WARN FileUtils: NOT DELETED BECAUSE NOT EXISTS reprocess directory file:/C:/Users/BTUSER/AppData/Local/Temp/skynet/kirby/t_kdit_agentes_alm/master/rep/output//cutoff_date=2019-03-06
+12:17:01.156 INFO Output: ParquetOutput writer
+12:17:02.350 INFO Starting job: parquet at ParquetOutput.scala:17
+12:17:02.897 INFO Created broadcast 2 from broadcast at DAGScheduler.scala:1006
+12:17:06.294 INFO Creating chameleon SdkClient
+12:17:06.729 INFO Building local credentials for user: test
+12:17:06.805 ERROR Exception in task 0.0 in stage 0.0 (TID 0)
+org.apache.spark.SparkException: Failed to execute user defined function($anonfun$encryptGeneric$1: (string) => string)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIterator.processNext(Unknown Source)
+	at org.apache.spark.sql.execution.BufferedRowIterator.hasNext(BufferedRowIterator.java:43)
+	at org.apache.spark.sql.execution.WholeStageCodegenExec$$anonfun$8$$anon$1.hasNext(WholeStageCodegenExec.scala:395)
+	at scala.collection.Iterator$$anon$12.hasNext(Iterator.scala:438)
+	at org.apache.spark.sql.execution.UnsafeExternalRowSorter.sort(UnsafeExternalRowSorter.java:190)
+	at org.apache.spark.sql.execution.SortExec$$anonfun$1.apply(SortExec.scala:108)
+	at org.apache.spark.sql.execution.SortExec$$anonfun$1.apply(SortExec.scala:101)
+	at org.apache.spark.rdd.RDD$$anonfun$mapPartitionsInternal$1$$anonfun$apply$25.apply(RDD.scala:827)
+	at org.apache.spark.rdd.RDD$$anonfun$mapPartitionsInternal$1$$anonfun$apply$25.apply(RDD.scala:827)
+	at org.apache.spark.rdd.MapPartitionsRDD.compute(MapPartitionsRDD.scala:38)
+	at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:323)
+	at org.apache.spark.rdd.RDD.iterator(RDD.scala:287)
+	at org.apache.spark.scheduler.ResultTask.runTask(ResultTask.scala:87)
+	at org.apache.spark.scheduler.Task.run(Task.scala:108)
+	at org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:338)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.nio.file.FileSystemNotFoundException
+	at com.sun.nio.zipfs.ZipFileSystemProvider.getFileSystem(ZipFileSystemProvider.java:171)
+	at com.sun.nio.zipfs.ZipFileSystemProvider.getPath(ZipFileSystemProvider.java:157)
+	at java.nio.file.Paths.get(Paths.java:143)
+	at com.bbva.secarq.chameleon.sdk.core.model.credentials.LocalCredentials.loadConfig(LocalCredentials.java:67)
+	at com.bbva.secarq.chameleon.sdk.core.client.ChameleonSDKClient.initialize(ChameleonSDKClient.java:55)
+	at com.datio.tokenization.configuration.ChameleonClientManager$.loadClientManager(ChameleonClientManager.scala:30)
+	at com.datio.tokenization.configuration.ChameleonClientManager$.clientManager(ChameleonClientManager.scala:18)
+	at com.datio.tokenization.service.TokenizerService.com$datio$tokenization$service$TokenizerService$$performEncryption(TokenizerService.scala:79)
+	at com.datio.tokenization.service.TokenizerService$$anonfun$xcryptParam$1.apply(TokenizerService.scala:73)
+	at com.datio.tokenization.service.TokenizerService$$anonfun$xcryptParam$1.apply(TokenizerService.scala:68)
+	at com.datio.tokenization.functions.package$$anonfun$nullOrFunc$1.apply(package.scala:16)
+	at com.datio.tokenization.functions.package$.applyEncryption(package.scala:50)
+	at com.datio.tokenization.functions.EncryptFunctions$$anonfun$encryptGeneric$1.apply(EncryptFunctions.scala:86)
+	... 18 more
+12:17:06.904 ERROR Task 0 in stage 0.0 failed 1 times; aborting job
+12:17:07.036 ERROR Aborting job null.
+org.apache.spark.SparkException: Job aborted due to stage failure: Task 0 in stage 0.0 failed 1 times, most recent failure: Lost task 0.0 in stage 0.0 (TID 0, localhost, executor driver): org.apache.spark.SparkException: Failed to execute user defined function($anonfun$encryptGeneric$1: (string) => string)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIterator.processNext(Unknown Source)
+	at org.apache.spark.sql.execution.BufferedRowIterator.hasNext(BufferedRowIterator.java:43)
+	at org.apache.spark.sql.execution.WholeStageCodegenExec$$anonfun$8$$anon$1.hasNext(WholeStageCodegenExec.scala:395)
+	at scala.collection.Iterator$$anon$12.hasNext(Iterator.scala:438)
+	at org.apache.spark.sql.execution.UnsafeExternalRowSorter.sort(UnsafeExternalRowSorter.java:190)
+	at org.apache.spark.sql.execution.SortExec$$anonfun$1.apply(SortExec.scala:108)
+	at org.apache.spark.sql.execution.SortExec$$anonfun$1.apply(SortExec.scala:101)
+	at org.apache.spark.rdd.RDD$$anonfun$mapPartitionsInternal$1$$anonfun$apply$25.apply(RDD.scala:827)
+	at org.apache.spark.rdd.RDD$$anonfun$mapPartitionsInternal$1$$anonfun$apply$25.apply(RDD.scala:827)
+	at org.apache.spark.rdd.MapPartitionsRDD.compute(MapPartitionsRDD.scala:38)
+	at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:323)
+	at org.apache.spark.rdd.RDD.iterator(RDD.scala:287)
+	at org.apache.spark.scheduler.ResultTask.runTask(ResultTask.scala:87)
+	at org.apache.spark.scheduler.Task.run(Task.scala:108)
+	at org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:338)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.nio.file.FileSystemNotFoundException
+	at com.sun.nio.zipfs.ZipFileSystemProvider.getFileSystem(ZipFileSystemProvider.java:171)
+	at com.sun.nio.zipfs.ZipFileSystemProvider.getPath(ZipFileSystemProvider.java:157)
+	at java.nio.file.Paths.get(Paths.java:143)
+	at com.bbva.secarq.chameleon.sdk.core.model.credentials.LocalCredentials.loadConfig(LocalCredentials.java:67)
+	at com.bbva.secarq.chameleon.sdk.core.client.ChameleonSDKClient.initialize(ChameleonSDKClient.java:55)
+	at com.datio.tokenization.configuration.ChameleonClientManager$.loadClientManager(ChameleonClientManager.scala:30)
+	at com.datio.tokenization.configuration.ChameleonClientManager$.clientManager(ChameleonClientManager.scala:18)
+	at com.datio.tokenization.service.TokenizerService.com$datio$tokenization$service$TokenizerService$$performEncryption(TokenizerService.scala:79)
+	at com.datio.tokenization.service.TokenizerService$$anonfun$xcryptParam$1.apply(TokenizerService.scala:73)
+	at com.datio.tokenization.service.TokenizerService$$anonfun$xcryptParam$1.apply(TokenizerService.scala:68)
+	at com.datio.tokenization.functions.package$$anonfun$nullOrFunc$1.apply(package.scala:16)
+	at com.datio.tokenization.functions.package$.applyEncryption(package.scala:50)
+	at com.datio.tokenization.functions.EncryptFunctions$$anonfun$encryptGeneric$1.apply(EncryptFunctions.scala:86)
+	... 18 more
+
+Driver stacktrace:
+	at org.apache.spark.scheduler.DAGScheduler.org$apache$spark$scheduler$DAGScheduler$$failJobAndIndependentStages(DAGScheduler.scala:1517)
+	at org.apache.spark.scheduler.DAGScheduler$$anonfun$abortStage$1.apply(DAGScheduler.scala:1505)
+	at org.apache.spark.scheduler.DAGScheduler$$anonfun$abortStage$1.apply(DAGScheduler.scala:1504)
+	at scala.collection.mutable.ResizableArray$class.foreach(ResizableArray.scala:59)
+	at scala.collection.mutable.ArrayBuffer.foreach(ArrayBuffer.scala:48)
+	at org.apache.spark.scheduler.DAGScheduler.abortStage(DAGScheduler.scala:1504)
+	at org.apache.spark.scheduler.DAGScheduler$$anonfun$handleTaskSetFailed$1.apply(DAGScheduler.scala:814)
+	at org.apache.spark.scheduler.DAGScheduler$$anonfun$handleTaskSetFailed$1.apply(DAGScheduler.scala:814)
+	at scala.Option.foreach(Option.scala:257)
+	at org.apache.spark.scheduler.DAGScheduler.handleTaskSetFailed(DAGScheduler.scala:814)
+	at org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.doOnReceive(DAGScheduler.scala:1732)
+	at org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.onReceive(DAGScheduler.scala:1687)
+	at org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.onReceive(DAGScheduler.scala:1676)
+	at org.apache.spark.util.EventLoop$$anon$1.run(EventLoop.scala:48)
+	at org.apache.spark.scheduler.DAGScheduler.runJob(DAGScheduler.scala:630)
+	at org.apache.spark.SparkContext.runJob(SparkContext.scala:2029)
+	at org.apache.spark.sql.execution.datasources.FileFormatWriter$$anonfun$write$1.apply$mcV$sp(FileFormatWriter.scala:186)
+	at org.apache.spark.sql.execution.datasources.FileFormatWriter$$anonfun$write$1.apply(FileFormatWriter.scala:166)
+	at org.apache.spark.sql.execution.datasources.FileFormatWriter$$anonfun$write$1.apply(FileFormatWriter.scala:166)
+	at org.apache.spark.sql.execution.SQLExecution$.withNewExecutionId(SQLExecution.scala:65)
+	at org.apache.spark.sql.execution.datasources.FileFormatWriter$.write(FileFormatWriter.scala:166)
+	at org.apache.spark.sql.execution.datasources.InsertIntoHadoopFsRelationCommand.run(InsertIntoHadoopFsRelationCommand.scala:145)
+	at org.apache.spark.sql.execution.command.ExecutedCommandExec.sideEffectResult$lzycompute(commands.scala:58)
+	at org.apache.spark.sql.execution.command.ExecutedCommandExec.sideEffectResult(commands.scala:56)
+	at org.apache.spark.sql.execution.command.ExecutedCommandExec.doExecute(commands.scala:74)
+	at org.apache.spark.sql.execution.SparkPlan$$anonfun$execute$1.apply(SparkPlan.scala:117)
+	at org.apache.spark.sql.execution.SparkPlan$$anonfun$execute$1.apply(SparkPlan.scala:117)
+	at org.apache.spark.sql.execution.SparkPlan$$anonfun$executeQuery$1.apply(SparkPlan.scala:138)
+	at org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:151)
+	at org.apache.spark.sql.execution.SparkPlan.executeQuery(SparkPlan.scala:135)
+	at org.apache.spark.sql.execution.SparkPlan.execute(SparkPlan.scala:116)
+	at org.apache.spark.sql.execution.QueryExecution.toRdd$lzycompute(QueryExecution.scala:92)
+	at org.apache.spark.sql.execution.QueryExecution.toRdd(QueryExecution.scala:92)
+	at org.apache.spark.sql.execution.datasources.DataSource.writeInFileFormat(DataSource.scala:435)
+	at org.apache.spark.sql.execution.datasources.DataSource.write(DataSource.scala:471)
+	at org.apache.spark.sql.execution.datasources.SaveIntoDataSourceCommand.run(SaveIntoDataSourceCommand.scala:50)
+	at org.apache.spark.sql.execution.command.ExecutedCommandExec.sideEffectResult$lzycompute(commands.scala:58)
+	at org.apache.spark.sql.execution.command.ExecutedCommandExec.sideEffectResult(commands.scala:56)
+	at org.apache.spark.sql.execution.command.ExecutedCommandExec.doExecute(commands.scala:74)
+	at org.apache.spark.sql.execution.SparkPlan$$anonfun$execute$1.apply(SparkPlan.scala:117)
+	at org.apache.spark.sql.execution.SparkPlan$$anonfun$execute$1.apply(SparkPlan.scala:117)
+	at org.apache.spark.sql.execution.SparkPlan$$anonfun$executeQuery$1.apply(SparkPlan.scala:138)
+	at org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:151)
+	at org.apache.spark.sql.execution.SparkPlan.executeQuery(SparkPlan.scala:135)
+	at org.apache.spark.sql.execution.SparkPlan.execute(SparkPlan.scala:116)
+	at org.apache.spark.sql.execution.QueryExecution.toRdd$lzycompute(QueryExecution.scala:92)
+	at org.apache.spark.sql.execution.QueryExecution.toRdd(QueryExecution.scala:92)
+	at org.apache.spark.sql.DataFrameWriter.runCommand(DataFrameWriter.scala:609)
+	at org.apache.spark.sql.DataFrameWriter.save(DataFrameWriter.scala:233)
+	at org.apache.spark.sql.DataFrameWriter.save(DataFrameWriter.scala:217)
+	at org.apache.spark.sql.DataFrameWriter.parquet(DataFrameWriter.scala:508)
+	at com.datio.kirby.output.ParquetOutput.writeDF(ParquetOutput.scala:17)
+	at com.datio.kirby.api.Output$class.write(Output.scala:68)
+	at com.datio.kirby.output.ParquetOutput.write(ParquetOutput.scala:10)
+	at com.datio.kirby.CheckFlow$class.writeDataFrame(CheckFlow.scala:66)
+	at com.datio.kirby.Launcher$.writeDataFrame(Launcher.scala:27)
+	at com.datio.kirby.Launcher$$anonfun$1.apply$mcV$sp(Launcher.scala:97)
+	at com.datio.kirby.Launcher$$anonfun$1.apply(Launcher.scala:65)
+	at com.datio.kirby.Launcher$$anonfun$1.apply(Launcher.scala:65)
+	at scala.util.Try$.apply(Try.scala:192)
+	at com.datio.kirby.Launcher$.runProcess(Launcher.scala:65)
+	at com.datio.kirby.Launcher.runProcess(Launcher.scala)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at com.datio.skynet.utils.spark.LocalJobRunner.execute(LocalJobRunner.scala:537)
+	at com.datio.skynet.utils.spark.LocalJobRunner$$anonfun$runKirby$1.apply$mcI$sp(LocalJobRunner.scala:403)
+	at com.datio.skynet.utils.spark.LocalJobRunner$$anonfun$runKirby$1.apply(LocalJobRunner.scala:390)
+	at com.datio.skynet.utils.spark.LocalJobRunner$$anonfun$runKirby$1.apply(LocalJobRunner.scala:390)
+	at com.datio.skynet.utils.helpers.package$$anonfun$1.apply(package.scala:39)
+	at scala.util.Try$.apply(Try.scala:192)
+	at com.datio.skynet.utils.helpers.package$.time(package.scala:38)
+	at com.datio.skynet.utils.spark.LocalJobRunner.runKirby(LocalJobRunner.scala:390)
+	at com.datio.skynet.utils.spark.LocalJobRunner$$anonfun$localIngest$1.apply$mcI$sp(LocalJobRunner.scala:386)
+	at com.datio.skynet.utils.spark.LocalJobRunner$$anonfun$localIngest$1.apply(LocalJobRunner.scala:365)
+	at com.datio.skynet.utils.spark.LocalJobRunner$$anonfun$localIngest$1.apply(LocalJobRunner.scala:365)
+	at com.datio.skynet.utils.helpers.package$$anonfun$1.apply(package.scala:39)
+	at scala.util.Try$.apply(Try.scala:192)
+	at com.datio.skynet.utils.helpers.package$.time(package.scala:38)
+	at com.datio.skynet.utils.spark.LocalJobRunner.localIngest(LocalJobRunner.scala:365)
+	at com.datio.skynet.cli.SkynetCli$.delayedEndpoint$com$datio$skynet$cli$SkynetCli$1(SkynetCli.scala:83)
+	at com.datio.skynet.cli.SkynetCli$delayedInit$body.apply(SkynetCli.scala:15)
+	at scala.Function0$class.apply$mcV$sp(Function0.scala:34)
+	at scala.runtime.AbstractFunction0.apply$mcV$sp(AbstractFunction0.scala:12)
+	at scala.App$$anonfun$main$1.apply(App.scala:76)
+	at scala.App$$anonfun$main$1.apply(App.scala:76)
+	at scala.collection.immutable.List.foreach(List.scala:381)
+	at scala.collection.generic.TraversableForwarder$class.foreach(TraversableForwarder.scala:35)
+	at scala.App$class.main(App.scala:76)
+	at com.datio.skynet.cli.SkynetCli$.main(SkynetCli.scala:15)
+	at com.datio.skynet.cli.SkynetCli.main(SkynetCli.scala)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at com.intellij.rt.execution.CommandLineWrapper.main(CommandLineWrapper.java:64)
+Caused by: org.apache.spark.SparkException: Failed to execute user defined function($anonfun$encryptGeneric$1: (string) => string)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIterator.processNext(Unknown Source)
+	at org.apache.spark.sql.execution.BufferedRowIterator.hasNext(BufferedRowIterator.java:43)
+	at org.apache.spark.sql.execution.WholeStageCodegenExec$$anonfun$8$$anon$1.hasNext(WholeStageCodegenExec.scala:395)
+	at scala.collection.Iterator$$anon$12.hasNext(Iterator.scala:438)
+	at org.apache.spark.sql.execution.UnsafeExternalRowSorter.sort(UnsafeExternalRowSorter.java:190)
+	at org.apache.spark.sql.execution.SortExec$$anonfun$1.apply(SortExec.scala:108)
+	at org.apache.spark.sql.execution.SortExec$$anonfun$1.apply(SortExec.scala:101)
+	at org.apache.spark.rdd.RDD$$anonfun$mapPartitionsInternal$1$$anonfun$apply$25.apply(RDD.scala:827)
+	at org.apache.spark.rdd.RDD$$anonfun$mapPartitionsInternal$1$$anonfun$apply$25.apply(RDD.scala:827)
+	at org.apache.spark.rdd.MapPartitionsRDD.compute(MapPartitionsRDD.scala:38)
+	at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:323)
+	at org.apache.spark.rdd.RDD.iterator(RDD.scala:287)
+	at org.apache.spark.scheduler.ResultTask.runTask(ResultTask.scala:87)
+	at org.apache.spark.scheduler.Task.run(Task.scala:108)
+	at org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:338)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.nio.file.FileSystemNotFoundException
+	at com.sun.nio.zipfs.ZipFileSystemProvider.getFileSystem(ZipFileSystemProvider.java:171)
+	at com.sun.nio.zipfs.ZipFileSystemProvider.getPath(ZipFileSystemProvider.java:157)
+	at java.nio.file.Paths.get(Paths.java:143)
+	at com.bbva.secarq.chameleon.sdk.core.model.credentials.LocalCredentials.loadConfig(LocalCredentials.java:67)
+	at com.bbva.secarq.chameleon.sdk.core.client.ChameleonSDKClient.initialize(ChameleonSDKClient.java:55)
+	at com.datio.tokenization.configuration.ChameleonClientManager$.loadClientManager(ChameleonClientManager.scala:30)
+	at com.datio.tokenization.configuration.ChameleonClientManager$.clientManager(ChameleonClientManager.scala:18)
+	at com.datio.tokenization.service.TokenizerService.com$datio$tokenization$service$TokenizerService$$performEncryption(TokenizerService.scala:79)
+	at com.datio.tokenization.service.TokenizerService$$anonfun$xcryptParam$1.apply(TokenizerService.scala:73)
+	at com.datio.tokenization.service.TokenizerService$$anonfun$xcryptParam$1.apply(TokenizerService.scala:68)
+	at com.datio.tokenization.functions.package$$anonfun$nullOrFunc$1.apply(package.scala:16)
+	at com.datio.tokenization.functions.package$.applyEncryption(package.scala:50)
+	at com.datio.tokenization.functions.EncryptFunctions$$anonfun$encryptGeneric$1.apply(EncryptFunctions.scala:86)
+	... 18 more
+12:17:07.167 ERROR Exception writing DataFrame: org.apache.spark.SparkException: Job aborted.
+	at org.apache.spark.sql.execution.datasources.FileFormatWriter$$anonfun$write$1.apply$mcV$sp(FileFormatWriter.scala:213)
+	at org.apache.spark.sql.execution.datasources.FileFormatWriter$$anonfun$write$1.apply(FileFormatWriter.scala:166)
+	at org.apache.spark.sql.execution.datasources.FileFormatWriter$$anonfun$write$1.apply(FileFormatWriter.scala:166)
+	at org.apache.spark.sql.execution.SQLExecution$.withNewExecutionId(SQLExecution.scala:65)
+	at org.apache.spark.sql.execution.datasources.FileFormatWriter$.write(FileFormatWriter.scala:166)
+	at org.apache.spark.sql.execution.datasources.InsertIntoHadoopFsRelationCommand.run(InsertIntoHadoopFsRelationCommand.scala:145)
+	at org.apache.spark.sql.execution.command.ExecutedCommandExec.sideEffectResult$lzycompute(commands.scala:58)
+	at org.apache.spark.sql.execution.command.ExecutedCommandExec.sideEffectResult(commands.scala:56)
+	at org.apache.spark.sql.execution.command.ExecutedCommandExec.doExecute(commands.scala:74)
+	at org.apache.spark.sql.execution.SparkPlan$$anonfun$execute$1.apply(SparkPlan.scala:117)
+	at org.apache.spark.sql.execution.SparkPlan$$anonfun$execute$1.apply(SparkPlan.scala:117)
+	at org.apache.spark.sql.execution.SparkPlan$$anonfun$executeQuery$1.apply(SparkPlan.scala:138)
+	at org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:151)
+	at org.apache.spark.sql.execution.SparkPlan.executeQuery(SparkPlan.scala:135)
+	at org.apache.spark.sql.execution.SparkPlan.execute(SparkPlan.scala:116)
+	at org.apache.spark.sql.execution.QueryExecution.toRdd$lzycompute(QueryExecution.scala:92)
+	at org.apache.spark.sql.execution.QueryExecution.toRdd(QueryExecution.scala:92)
+	at org.apache.spark.sql.execution.datasources.DataSource.writeInFileFormat(DataSource.scala:435)
+	at org.apache.spark.sql.execution.datasources.DataSource.write(DataSource.scala:471)
+	at org.apache.spark.sql.execution.datasources.SaveIntoDataSourceCommand.run(SaveIntoDataSourceCommand.scala:50)
+	at org.apache.spark.sql.execution.command.ExecutedCommandExec.sideEffectResult$lzycompute(commands.scala:58)
+	at org.apache.spark.sql.execution.command.ExecutedCommandExec.sideEffectResult(commands.scala:56)
+	at org.apache.spark.sql.execution.command.ExecutedCommandExec.doExecute(commands.scala:74)
+	at org.apache.spark.sql.execution.SparkPlan$$anonfun$execute$1.apply(SparkPlan.scala:117)
+	at org.apache.spark.sql.execution.SparkPlan$$anonfun$execute$1.apply(SparkPlan.scala:117)
+	at org.apache.spark.sql.execution.SparkPlan$$anonfun$executeQuery$1.apply(SparkPlan.scala:138)
+	at org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:151)
+	at org.apache.spark.sql.execution.SparkPlan.executeQuery(SparkPlan.scala:135)
+	at org.apache.spark.sql.execution.SparkPlan.execute(SparkPlan.scala:116)
+	at org.apache.spark.sql.execution.QueryExecution.toRdd$lzycompute(QueryExecution.scala:92)
+	at org.apache.spark.sql.execution.QueryExecution.toRdd(QueryExecution.scala:92)
+	at org.apache.spark.sql.DataFrameWriter.runCommand(DataFrameWriter.scala:609)
+	at org.apache.spark.sql.DataFrameWriter.save(DataFrameWriter.scala:233)
+	at org.apache.spark.sql.DataFrameWriter.save(DataFrameWriter.scala:217)
+	at org.apache.spark.sql.DataFrameWriter.parquet(DataFrameWriter.scala:508)
+	at com.datio.kirby.output.ParquetOutput.writeDF(ParquetOutput.scala:17)
+	at com.datio.kirby.api.Output$class.write(Output.scala:68)
+	at com.datio.kirby.output.ParquetOutput.write(ParquetOutput.scala:10)
+	at com.datio.kirby.CheckFlow$class.writeDataFrame(CheckFlow.scala:66)
+	at com.datio.kirby.Launcher$.writeDataFrame(Launcher.scala:27)
+	at com.datio.kirby.Launcher$$anonfun$1.apply$mcV$sp(Launcher.scala:97)
+	at com.datio.kirby.Launcher$$anonfun$1.apply(Launcher.scala:65)
+	at com.datio.kirby.Launcher$$anonfun$1.apply(Launcher.scala:65)
+	at scala.util.Try$.apply(Try.scala:192)
+	at com.datio.kirby.Launcher$.runProcess(Launcher.scala:65)
+	at com.datio.kirby.Launcher.runProcess(Launcher.scala)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at com.datio.skynet.utils.spark.LocalJobRunner.execute(LocalJobRunner.scala:537)
+	at com.datio.skynet.utils.spark.LocalJobRunner$$anonfun$runKirby$1.apply$mcI$sp(LocalJobRunner.scala:403)
+	at com.datio.skynet.utils.spark.LocalJobRunner$$anonfun$runKirby$1.apply(LocalJobRunner.scala:390)
+	at com.datio.skynet.utils.spark.LocalJobRunner$$anonfun$runKirby$1.apply(LocalJobRunner.scala:390)
+	at com.datio.skynet.utils.helpers.package$$anonfun$1.apply(package.scala:39)
+	at scala.util.Try$.apply(Try.scala:192)
+	at com.datio.skynet.utils.helpers.package$.time(package.scala:38)
+	at com.datio.skynet.utils.spark.LocalJobRunner.runKirby(LocalJobRunner.scala:390)
+	at com.datio.skynet.utils.spark.LocalJobRunner$$anonfun$localIngest$1.apply$mcI$sp(LocalJobRunner.scala:386)
+	at com.datio.skynet.utils.spark.LocalJobRunner$$anonfun$localIngest$1.apply(LocalJobRunner.scala:365)
+	at com.datio.skynet.utils.spark.LocalJobRunner$$anonfun$localIngest$1.apply(LocalJobRunner.scala:365)
+	at com.datio.skynet.utils.helpers.package$$anonfun$1.apply(package.scala:39)
+	at scala.util.Try$.apply(Try.scala:192)
+	at com.datio.skynet.utils.helpers.package$.time(package.scala:38)
+	at com.datio.skynet.utils.spark.LocalJobRunner.localIngest(LocalJobRunner.scala:365)
+	at com.datio.skynet.cli.SkynetCli$.delayedEndpoint$com$datio$skynet$cli$SkynetCli$1(SkynetCli.scala:83)
+	at com.datio.skynet.cli.SkynetCli$delayedInit$body.apply(SkynetCli.scala:15)
+	at scala.Function0$class.apply$mcV$sp(Function0.scala:34)
+	at scala.runtime.AbstractFunction0.apply$mcV$sp(AbstractFunction0.scala:12)
+	at scala.App$$anonfun$main$1.apply(App.scala:76)
+	at scala.App$$anonfun$main$1.apply(App.scala:76)
+	at scala.collection.immutable.List.foreach(List.scala:381)
+	at scala.collection.generic.TraversableForwarder$class.foreach(TraversableForwarder.scala:35)
+	at scala.App$class.main(App.scala:76)
+	at com.datio.skynet.cli.SkynetCli$.main(SkynetCli.scala:15)
+	at com.datio.skynet.cli.SkynetCli.main(SkynetCli.scala)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at com.intellij.rt.execution.CommandLineWrapper.main(CommandLineWrapper.java:64)
+Caused by: org.apache.spark.SparkException: Job aborted due to stage failure: Task 0 in stage 0.0 failed 1 times, most recent failure: Lost task 0.0 in stage 0.0 (TID 0, localhost, executor driver): org.apache.spark.SparkException: Failed to execute user defined function($anonfun$encryptGeneric$1: (string) => string)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIterator.processNext(Unknown Source)
+	at org.apache.spark.sql.execution.BufferedRowIterator.hasNext(BufferedRowIterator.java:43)
+	at org.apache.spark.sql.execution.WholeStageCodegenExec$$anonfun$8$$anon$1.hasNext(WholeStageCodegenExec.scala:395)
+	at scala.collection.Iterator$$anon$12.hasNext(Iterator.scala:438)
+	at org.apache.spark.sql.execution.UnsafeExternalRowSorter.sort(UnsafeExternalRowSorter.java:190)
+	at org.apache.spark.sql.execution.SortExec$$anonfun$1.apply(SortExec.scala:108)
+	at org.apache.spark.sql.execution.SortExec$$anonfun$1.apply(SortExec.scala:101)
+	at org.apache.spark.rdd.RDD$$anonfun$mapPartitionsInternal$1$$anonfun$apply$25.apply(RDD.scala:827)
+	at org.apache.spark.rdd.RDD$$anonfun$mapPartitionsInternal$1$$anonfun$apply$25.apply(RDD.scala:827)
+	at org.apache.spark.rdd.MapPartitionsRDD.compute(MapPartitionsRDD.scala:38)
+	at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:323)
+	at org.apache.spark.rdd.RDD.iterator(RDD.scala:287)
+	at org.apache.spark.scheduler.ResultTask.runTask(ResultTask.scala:87)
+	at org.apache.spark.scheduler.Task.run(Task.scala:108)
+	at org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:338)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.nio.file.FileSystemNotFoundException
+	at com.sun.nio.zipfs.ZipFileSystemProvider.getFileSystem(ZipFileSystemProvider.java:171)
+	at com.sun.nio.zipfs.ZipFileSystemProvider.getPath(ZipFileSystemProvider.java:157)
+	at java.nio.file.Paths.get(Paths.java:143)
+	at com.bbva.secarq.chameleon.sdk.core.model.credentials.LocalCredentials.loadConfig(LocalCredentials.java:67)
+	at com.bbva.secarq.chameleon.sdk.core.client.ChameleonSDKClient.initialize(ChameleonSDKClient.java:55)
+	at com.datio.tokenization.configuration.ChameleonClientManager$.loadClientManager(ChameleonClientManager.scala:30)
+	at com.datio.tokenization.configuration.ChameleonClientManager$.clientManager(ChameleonClientManager.scala:18)
+	at com.datio.tokenization.service.TokenizerService.com$datio$tokenization$service$TokenizerService$$performEncryption(TokenizerService.scala:79)
+	at com.datio.tokenization.service.TokenizerService$$anonfun$xcryptParam$1.apply(TokenizerService.scala:73)
+	at com.datio.tokenization.service.TokenizerService$$anonfun$xcryptParam$1.apply(TokenizerService.scala:68)
+	at com.datio.tokenization.functions.package$$anonfun$nullOrFunc$1.apply(package.scala:16)
+	at com.datio.tokenization.functions.package$.applyEncryption(package.scala:50)
+	at com.datio.tokenization.functions.EncryptFunctions$$anonfun$encryptGeneric$1.apply(EncryptFunctions.scala:86)
+	... 18 more
+
+Driver stacktrace:
+	at org.apache.spark.scheduler.DAGScheduler.org$apache$spark$scheduler$DAGScheduler$$failJobAndIndependentStages(DAGScheduler.scala:1517)
+	at org.apache.spark.scheduler.DAGScheduler$$anonfun$abortStage$1.apply(DAGScheduler.scala:1505)
+	at org.apache.spark.scheduler.DAGScheduler$$anonfun$abortStage$1.apply(DAGScheduler.scala:1504)
+	at scala.collection.mutable.ResizableArray$class.foreach(ResizableArray.scala:59)
+	at scala.collection.mutable.ArrayBuffer.foreach(ArrayBuffer.scala:48)
+	at org.apache.spark.scheduler.DAGScheduler.abortStage(DAGScheduler.scala:1504)
+	at org.apache.spark.scheduler.DAGScheduler$$anonfun$handleTaskSetFailed$1.apply(DAGScheduler.scala:814)
+	at org.apache.spark.scheduler.DAGScheduler$$anonfun$handleTaskSetFailed$1.apply(DAGScheduler.scala:814)
+	at scala.Option.foreach(Option.scala:257)
+	at org.apache.spark.scheduler.DAGScheduler.handleTaskSetFailed(DAGScheduler.scala:814)
+	at org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.doOnReceive(DAGScheduler.scala:1732)
+	at org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.onReceive(DAGScheduler.scala:1687)
+	at org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.onReceive(DAGScheduler.scala:1676)
+	at org.apache.spark.util.EventLoop$$anon$1.run(EventLoop.scala:48)
+	at org.apache.spark.scheduler.DAGScheduler.runJob(DAGScheduler.scala:630)
+	at org.apache.spark.SparkContext.runJob(SparkContext.scala:2029)
+	at org.apache.spark.sql.execution.datasources.FileFormatWriter$$anonfun$write$1.apply$mcV$sp(FileFormatWriter.scala:186)
+	... 80 more
+Caused by: org.apache.spark.SparkException: Failed to execute user defined function($anonfun$encryptGeneric$1: (string) => string)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIterator.processNext(Unknown Source)
+	at org.apache.spark.sql.execution.BufferedRowIterator.hasNext(BufferedRowIterator.java:43)
+	at org.apache.spark.sql.execution.WholeStageCodegenExec$$anonfun$8$$anon$1.hasNext(WholeStageCodegenExec.scala:395)
+	at scala.collection.Iterator$$anon$12.hasNext(Iterator.scala:438)
+	at org.apache.spark.sql.execution.UnsafeExternalRowSorter.sort(UnsafeExternalRowSorter.java:190)
+	at org.apache.spark.sql.execution.SortExec$$anonfun$1.apply(SortExec.scala:108)
+	at org.apache.spark.sql.execution.SortExec$$anonfun$1.apply(SortExec.scala:101)
+	at org.apache.spark.rdd.RDD$$anonfun$mapPartitionsInternal$1$$anonfun$apply$25.apply(RDD.scala:827)
+	at org.apache.spark.rdd.RDD$$anonfun$mapPartitionsInternal$1$$anonfun$apply$25.apply(RDD.scala:827)
+	at org.apache.spark.rdd.MapPartitionsRDD.compute(MapPartitionsRDD.scala:38)
+	at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:323)
+	at org.apache.spark.rdd.RDD.iterator(RDD.scala:287)
+	at org.apache.spark.scheduler.ResultTask.runTask(ResultTask.scala:87)
+	at org.apache.spark.scheduler.Task.run(Task.scala:108)
+	at org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:338)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.nio.file.FileSystemNotFoundException
+	at com.sun.nio.zipfs.ZipFileSystemProvider.getFileSystem(ZipFileSystemProvider.java:171)
+	at com.sun.nio.zipfs.ZipFileSystemProvider.getPath(ZipFileSystemProvider.java:157)
+	at java.nio.file.Paths.get(Paths.java:143)
+	at com.bbva.secarq.chameleon.sdk.core.model.credentials.LocalCredentials.loadConfig(LocalCredentials.java:67)
+	at com.bbva.secarq.chameleon.sdk.core.client.ChameleonSDKClient.initialize(ChameleonSDKClient.java:55)
+	at com.datio.tokenization.configuration.ChameleonClientManager$.loadClientManager(ChameleonClientManager.scala:30)
+	at com.datio.tokenization.configuration.ChameleonClientManager$.clientManager(ChameleonClientManager.scala:18)
+	at com.datio.tokenization.service.TokenizerService.com$datio$tokenization$service$TokenizerService$$performEncryption(TokenizerService.scala:79)
+	at com.datio.tokenization.service.TokenizerService$$anonfun$xcryptParam$1.apply(TokenizerService.scala:73)
+	at com.datio.tokenization.service.TokenizerService$$anonfun$xcryptParam$1.apply(TokenizerService.scala:68)
+	at com.datio.tokenization.functions.package$$anonfun$nullOrFunc$1.apply(package.scala:16)
+	at com.datio.tokenization.functions.package$.applyEncryption(package.scala:50)
+	at com.datio.tokenization.functions.EncryptFunctions$$anonfun$encryptGeneric$1.apply(EncryptFunctions.scala:86)
+	... 18 more
+
+12:17:07.189 WARN Input Args: Config(SimpleConfigObject({"kirby":{"input":{"applyConversions":false,"options":{"castMode":"notPermissive"},"paths":["file:/C:/Users/BTUSER/AppData/Local/Temp/skynet/kirby/t_kdit_agentes_alm/master/rep/input/"],"schema":{"path":"file:/C:/Users/BTUSER/Documents/scala/angel_skynet_ingestion_certification/kdit/src/main/resources/kirby/kdit/t_kdit_agentes_alm/master/t_kdit_agentes_alm.input.schema"},"type":"avro"},"output":{"coalesce":{"partitions":1},"force":false,"mode":"reprocess","options":{},"partition":["cutoff_date"],"path":"file:/C:/Users/BTUSER/AppData/Local/Temp/skynet/kirby/t_kdit_agentes_alm/master/rep/output/","reprocess":["cutoff_date=2019-03-06"],"schema":{"path":"file:/C:/Users/BTUSER/Documents/scala/angel_skynet_ingestion_certification/kdit/src/main/resources/kirby/kdit/t_kdit_agentes_alm/master/t_kdit_agentes_alm.output.schema"},"type":"parquet"},"transformations":[{"filter":"cutoff_date='2019-03-06'","type":"sqlFilter"},{"field":"operational_audit_insert_date","type":"setCurrentDate"},{"copyField":"gl_folio_movement_date","field":"cutoff_date","type":"copycolumn"},{"default":"1","fields":["gl_folio_close_id"],"type":"initNulls"},{"default":"0","fields":["credit_note_id"],"type":"initNulls"},{"default":"3","fields":["bill_internal_id"],"type":"initNulls"},{"field":"gl_folio_movement_date|cutoff_date","regex":true,"replacements":[],"type":"formatter","typeToCast":"date"},{"field":"gl_folio_id|gl_folio_internal_id|operation_id","regex":true,"replacements":[],"type":"formatter","typeToCast":"decimal(22,0)"},{"field":"premium_balance_amount|gl_folio_credit_amount|gl_folio_debit_amount|gl_folio_close_id|bill_internal_id|credit_note_id","regex":true,"replacements":[],"type":"formatter","typeToCast":"decimal(22,2)"},{"field":"gl_folio_close_id","replacements":[],"type":"formatter","typeToCast":"decimal(22,0)"},{"columnsToDrop":["premium_balance_mark_type"],"type":"dropcolumns"}]}}))
+12:17:07.196 ERROR Exception: com.datio.kirby.api.exceptions.KirbyException: 117 - Output Error: Fatal error in the Output
+	at com.datio.kirby.CheckFlow$class.writeDataFrame(CheckFlow.scala:72)
+	at com.datio.kirby.Launcher$.writeDataFrame(Launcher.scala:27)
+	at com.datio.kirby.Launcher$$anonfun$1.apply$mcV$sp(Launcher.scala:97)
+	at com.datio.kirby.Launcher$$anonfun$1.apply(Launcher.scala:65)
+	at com.datio.kirby.Launcher$$anonfun$1.apply(Launcher.scala:65)
+	at scala.util.Try$.apply(Try.scala:192)
+	at com.datio.kirby.Launcher$.runProcess(Launcher.scala:65)
+	at com.datio.kirby.Launcher.runProcess(Launcher.scala)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at com.datio.skynet.utils.spark.LocalJobRunner.execute(LocalJobRunner.scala:537)
+	at com.datio.skynet.utils.spark.LocalJobRunner$$anonfun$runKirby$1.apply$mcI$sp(LocalJobRunner.scala:403)
+	at com.datio.skynet.utils.spark.LocalJobRunner$$anonfun$runKirby$1.apply(LocalJobRunner.scala:390)
+	at com.datio.skynet.utils.spark.LocalJobRunner$$anonfun$runKirby$1.apply(LocalJobRunner.scala:390)
+	at com.datio.skynet.utils.helpers.package$$anonfun$1.apply(package.scala:39)
+	at scala.util.Try$.apply(Try.scala:192)
+	at com.datio.skynet.utils.helpers.package$.time(package.scala:38)
+	at com.datio.skynet.utils.spark.LocalJobRunner.runKirby(LocalJobRunner.scala:390)
+	at com.datio.skynet.utils.spark.LocalJobRunner$$anonfun$localIngest$1.apply$mcI$sp(LocalJobRunner.scala:386)
+	at com.datio.skynet.utils.spark.LocalJobRunner$$anonfun$localIngest$1.apply(LocalJobRunner.scala:365)
+	at com.datio.skynet.utils.spark.LocalJobRunner$$anonfun$localIngest$1.apply(LocalJobRunner.scala:365)
+	at com.datio.skynet.utils.helpers.package$$anonfun$1.apply(package.scala:39)
+	at scala.util.Try$.apply(Try.scala:192)
+	at com.datio.skynet.utils.helpers.package$.time(package.scala:38)
+	at com.datio.skynet.utils.spark.LocalJobRunner.localIngest(LocalJobRunner.scala:365)
+	at com.datio.skynet.cli.SkynetCli$.delayedEndpoint$com$datio$skynet$cli$SkynetCli$1(SkynetCli.scala:83)
+	at com.datio.skynet.cli.SkynetCli$delayedInit$body.apply(SkynetCli.scala:15)
+	at scala.Function0$class.apply$mcV$sp(Function0.scala:34)
+	at scala.runtime.AbstractFunction0.apply$mcV$sp(AbstractFunction0.scala:12)
+	at scala.App$$anonfun$main$1.apply(App.scala:76)
+	at scala.App$$anonfun$main$1.apply(App.scala:76)
+	at scala.collection.immutable.List.foreach(List.scala:381)
+	at scala.collection.generic.TraversableForwarder$class.foreach(TraversableForwarder.scala:35)
+	at scala.App$class.main(App.scala:76)
+	at com.datio.skynet.cli.SkynetCli$.main(SkynetCli.scala:15)
+	at com.datio.skynet.cli.SkynetCli.main(SkynetCli.scala)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at com.intellij.rt.execution.CommandLineWrapper.main(CommandLineWrapper.java:64)
+Caused by: org.apache.spark.SparkException: Job aborted.
+	at org.apache.spark.sql.execution.datasources.FileFormatWriter$$anonfun$write$1.apply$mcV$sp(FileFormatWriter.scala:213)
+	at org.apache.spark.sql.execution.datasources.FileFormatWriter$$anonfun$write$1.apply(FileFormatWriter.scala:166)
+	at org.apache.spark.sql.execution.datasources.FileFormatWriter$$anonfun$write$1.apply(FileFormatWriter.scala:166)
+	at org.apache.spark.sql.execution.SQLExecution$.withNewExecutionId(SQLExecution.scala:65)
+	at org.apache.spark.sql.execution.datasources.FileFormatWriter$.write(FileFormatWriter.scala:166)
+	at org.apache.spark.sql.execution.datasources.InsertIntoHadoopFsRelationCommand.run(InsertIntoHadoopFsRelationCommand.scala:145)
+	at org.apache.spark.sql.execution.command.ExecutedCommandExec.sideEffectResult$lzycompute(commands.scala:58)
+	at org.apache.spark.sql.execution.command.ExecutedCommandExec.sideEffectResult(commands.scala:56)
+	at org.apache.spark.sql.execution.command.ExecutedCommandExec.doExecute(commands.scala:74)
+	at org.apache.spark.sql.execution.SparkPlan$$anonfun$execute$1.apply(SparkPlan.scala:117)
+	at org.apache.spark.sql.execution.SparkPlan$$anonfun$execute$1.apply(SparkPlan.scala:117)
+	at org.apache.spark.sql.execution.SparkPlan$$anonfun$executeQuery$1.apply(SparkPlan.scala:138)
+	at org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:151)
+	at org.apache.spark.sql.execution.SparkPlan.executeQuery(SparkPlan.scala:135)
+	at org.apache.spark.sql.execution.SparkPlan.execute(SparkPlan.scala:116)
+	at org.apache.spark.sql.execution.QueryExecution.toRdd$lzycompute(QueryExecution.scala:92)
+	at org.apache.spark.sql.execution.QueryExecution.toRdd(QueryExecution.scala:92)
+	at org.apache.spark.sql.execution.datasources.DataSource.writeInFileFormat(DataSource.scala:435)
+	at org.apache.spark.sql.execution.datasources.DataSource.write(DataSource.scala:471)
+	at org.apache.spark.sql.execution.datasources.SaveIntoDataSourceCommand.run(SaveIntoDataSourceCommand.scala:50)
+	at org.apache.spark.sql.execution.command.ExecutedCommandExec.sideEffectResult$lzycompute(commands.scala:58)
+	at org.apache.spark.sql.execution.command.ExecutedCommandExec.sideEffectResult(commands.scala:56)
+	at org.apache.spark.sql.execution.command.ExecutedCommandExec.doExecute(commands.scala:74)
+	at org.apache.spark.sql.execution.SparkPlan$$anonfun$execute$1.apply(SparkPlan.scala:117)
+	at org.apache.spark.sql.execution.SparkPlan$$anonfun$execute$1.apply(SparkPlan.scala:117)
+	at org.apache.spark.sql.execution.SparkPlan$$anonfun$executeQuery$1.apply(SparkPlan.scala:138)
+	at org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:151)
+	at org.apache.spark.sql.execution.SparkPlan.executeQuery(SparkPlan.scala:135)
+	at org.apache.spark.sql.execution.SparkPlan.execute(SparkPlan.scala:116)
+	at org.apache.spark.sql.execution.QueryExecution.toRdd$lzycompute(QueryExecution.scala:92)
+	at org.apache.spark.sql.execution.QueryExecution.toRdd(QueryExecution.scala:92)
+	at org.apache.spark.sql.DataFrameWriter.runCommand(DataFrameWriter.scala:609)
+	at org.apache.spark.sql.DataFrameWriter.save(DataFrameWriter.scala:233)
+	at org.apache.spark.sql.DataFrameWriter.save(DataFrameWriter.scala:217)
+	at org.apache.spark.sql.DataFrameWriter.parquet(DataFrameWriter.scala:508)
+	at com.datio.kirby.output.ParquetOutput.writeDF(ParquetOutput.scala:17)
+	at com.datio.kirby.api.Output$class.write(Output.scala:68)
+	at com.datio.kirby.output.ParquetOutput.write(ParquetOutput.scala:10)
+	at com.datio.kirby.CheckFlow$class.writeDataFrame(CheckFlow.scala:66)
+	... 42 more
+Caused by: org.apache.spark.SparkException: Job aborted due to stage failure: Task 0 in stage 0.0 failed 1 times, most recent failure: Lost task 0.0 in stage 0.0 (TID 0, localhost, executor driver): org.apache.spark.SparkException: Failed to execute user defined function($anonfun$encryptGeneric$1: (string) => string)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIterator.processNext(Unknown Source)
+	at org.apache.spark.sql.execution.BufferedRowIterator.hasNext(BufferedRowIterator.java:43)
+	at org.apache.spark.sql.execution.WholeStageCodegenExec$$anonfun$8$$anon$1.hasNext(WholeStageCodegenExec.scala:395)
+	at scala.collection.Iterator$$anon$12.hasNext(Iterator.scala:438)
+	at org.apache.spark.sql.execution.UnsafeExternalRowSorter.sort(UnsafeExternalRowSorter.java:190)
+	at org.apache.spark.sql.execution.SortExec$$anonfun$1.apply(SortExec.scala:108)
+	at org.apache.spark.sql.execution.SortExec$$anonfun$1.apply(SortExec.scala:101)
+	at org.apache.spark.rdd.RDD$$anonfun$mapPartitionsInternal$1$$anonfun$apply$25.apply(RDD.scala:827)
+	at org.apache.spark.rdd.RDD$$anonfun$mapPartitionsInternal$1$$anonfun$apply$25.apply(RDD.scala:827)
+	at org.apache.spark.rdd.MapPartitionsRDD.compute(MapPartitionsRDD.scala:38)
+	at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:323)
+	at org.apache.spark.rdd.RDD.iterator(RDD.scala:287)
+	at org.apache.spark.scheduler.ResultTask.runTask(ResultTask.scala:87)
+	at org.apache.spark.scheduler.Task.run(Task.scala:108)
+	at org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:338)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.nio.file.FileSystemNotFoundException
+	at com.sun.nio.zipfs.ZipFileSystemProvider.getFileSystem(ZipFileSystemProvider.java:171)
+	at com.sun.nio.zipfs.ZipFileSystemProvider.getPath(ZipFileSystemProvider.java:157)
+	at java.nio.file.Paths.get(Paths.java:143)
+	at com.bbva.secarq.chameleon.sdk.core.model.credentials.LocalCredentials.loadConfig(LocalCredentials.java:67)
+	at com.bbva.secarq.chameleon.sdk.core.client.ChameleonSDKClient.initialize(ChameleonSDKClient.java:55)
+	at com.datio.tokenization.configuration.ChameleonClientManager$.loadClientManager(ChameleonClientManager.scala:30)
+	at com.datio.tokenization.configuration.ChameleonClientManager$.clientManager(ChameleonClientManager.scala:18)
+	at com.datio.tokenization.service.TokenizerService.com$datio$tokenization$service$TokenizerService$$performEncryption(TokenizerService.scala:79)
+	at com.datio.tokenization.service.TokenizerService$$anonfun$xcryptParam$1.apply(TokenizerService.scala:73)
+	at com.datio.tokenization.service.TokenizerService$$anonfun$xcryptParam$1.apply(TokenizerService.scala:68)
+	at com.datio.tokenization.functions.package$$anonfun$nullOrFunc$1.apply(package.scala:16)
+	at com.datio.tokenization.functions.package$.applyEncryption(package.scala:50)
+	at com.datio.tokenization.functions.EncryptFunctions$$anonfun$encryptGeneric$1.apply(EncryptFunctions.scala:86)
+	... 18 more
+
+Driver stacktrace:
+	at org.apache.spark.scheduler.DAGScheduler.org$apache$spark$scheduler$DAGScheduler$$failJobAndIndependentStages(DAGScheduler.scala:1517)
+	at org.apache.spark.scheduler.DAGScheduler$$anonfun$abortStage$1.apply(DAGScheduler.scala:1505)
+	at org.apache.spark.scheduler.DAGScheduler$$anonfun$abortStage$1.apply(DAGScheduler.scala:1504)
+	at scala.collection.mutable.ResizableArray$class.foreach(ResizableArray.scala:59)
+	at scala.collection.mutable.ArrayBuffer.foreach(ArrayBuffer.scala:48)
+	at org.apache.spark.scheduler.DAGScheduler.abortStage(DAGScheduler.scala:1504)
+	at org.apache.spark.scheduler.DAGScheduler$$anonfun$handleTaskSetFailed$1.apply(DAGScheduler.scala:814)
+	at org.apache.spark.scheduler.DAGScheduler$$anonfun$handleTaskSetFailed$1.apply(DAGScheduler.scala:814)
+	at scala.Option.foreach(Option.scala:257)
+	at org.apache.spark.scheduler.DAGScheduler.handleTaskSetFailed(DAGScheduler.scala:814)
+	at org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.doOnReceive(DAGScheduler.scala:1732)
+	at org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.onReceive(DAGScheduler.scala:1687)
+	at org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.onReceive(DAGScheduler.scala:1676)
+	at org.apache.spark.util.EventLoop$$anon$1.run(EventLoop.scala:48)
+	at org.apache.spark.scheduler.DAGScheduler.runJob(DAGScheduler.scala:630)
+	at org.apache.spark.SparkContext.runJob(SparkContext.scala:2029)
+	at org.apache.spark.sql.execution.datasources.FileFormatWriter$$anonfun$write$1.apply$mcV$sp(FileFormatWriter.scala:186)
+	... 80 more
+Caused by: org.apache.spark.SparkException: Failed to execute user defined function($anonfun$encryptGeneric$1: (string) => string)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIterator.processNext(Unknown Source)
+	at org.apache.spark.sql.execution.BufferedRowIterator.hasNext(BufferedRowIterator.java:43)
+	at org.apache.spark.sql.execution.WholeStageCodegenExec$$anonfun$8$$anon$1.hasNext(WholeStageCodegenExec.scala:395)
+	at scala.collection.Iterator$$anon$12.hasNext(Iterator.scala:438)
+	at org.apache.spark.sql.execution.UnsafeExternalRowSorter.sort(UnsafeExternalRowSorter.java:190)
+	at org.apache.spark.sql.execution.SortExec$$anonfun$1.apply(SortExec.scala:108)
+	at org.apache.spark.sql.execution.SortExec$$anonfun$1.apply(SortExec.scala:101)
+	at org.apache.spark.rdd.RDD$$anonfun$mapPartitionsInternal$1$$anonfun$apply$25.apply(RDD.scala:827)
+	at org.apache.spark.rdd.RDD$$anonfun$mapPartitionsInternal$1$$anonfun$apply$25.apply(RDD.scala:827)
+	at org.apache.spark.rdd.MapPartitionsRDD.compute(MapPartitionsRDD.scala:38)
+	at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:323)
+	at org.apache.spark.rdd.RDD.iterator(RDD.scala:287)
+	at org.apache.spark.scheduler.ResultTask.runTask(ResultTask.scala:87)
+	at org.apache.spark.scheduler.Task.run(Task.scala:108)
+	at org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:338)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.nio.file.FileSystemNotFoundException
+	at com.sun.nio.zipfs.ZipFileSystemProvider.getFileSystem(ZipFileSystemProvider.java:171)
+	at com.sun.nio.zipfs.ZipFileSystemProvider.getPath(ZipFileSystemProvider.java:157)
+	at java.nio.file.Paths.get(Paths.java:143)
+	at com.bbva.secarq.chameleon.sdk.core.model.credentials.LocalCredentials.loadConfig(LocalCredentials.java:67)
+	at com.bbva.secarq.chameleon.sdk.core.client.ChameleonSDKClient.initialize(ChameleonSDKClient.java:55)
+	at com.datio.tokenization.configuration.ChameleonClientManager$.loadClientManager(ChameleonClientManager.scala:30)
+	at com.datio.tokenization.configuration.ChameleonClientManager$.clientManager(ChameleonClientManager.scala:18)
+	at com.datio.tokenization.service.TokenizerService.com$datio$tokenization$service$TokenizerService$$performEncryption(TokenizerService.scala:79)
+	at com.datio.tokenization.service.TokenizerService$$anonfun$xcryptParam$1.apply(TokenizerService.scala:73)
+	at com.datio.tokenization.service.TokenizerService$$anonfun$xcryptParam$1.apply(TokenizerService.scala:68)
+	at com.datio.tokenization.functions.package$$anonfun$nullOrFunc$1.apply(package.scala:16)
+	at com.datio.tokenization.functions.package$.applyEncryption(package.scala:50)
+	at com.datio.tokenization.functions.EncryptFunctions$$anonfun$encryptGeneric$1.apply(EncryptFunctions.scala:86)
+	... 18 more
+
+12:17:07.207 ERROR An error with code '117' has occurred when executing the Spark job.
+12:17:07.222 INFO Invoking stop() from shutdown hook
+
+Process finished with exit code 117
